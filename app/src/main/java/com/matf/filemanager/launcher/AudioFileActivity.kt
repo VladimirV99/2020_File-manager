@@ -109,12 +109,12 @@ class AudioFileActivity : AppCompatActivity() {
         if(mp.isPlaying){
             // Stop
             mp.pause()
-            playBtn.setBackgroundResource(R.drawable.play)
+            playBtn.setBackgroundResource(R.drawable.icon_play)
         }
         else{
             // Start
             mp.start()
-            playBtn.setBackgroundResource(R.drawable.stop)
+            playBtn.setBackgroundResource(R.drawable.icon_stop)
         }
     }
 

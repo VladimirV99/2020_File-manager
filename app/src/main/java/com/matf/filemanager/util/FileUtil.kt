@@ -45,11 +45,11 @@ fun getIconForFile(file: File): Int {
     } else {
         return when(getTypeFromExtension(file.extension)) {
             FileTypes.IMAGE -> R.drawable.file_image
-            FileTypes.AUDIO -> R.drawable.audio1
-            FileTypes.VIDEO -> R.drawable.file_media
-            FileTypes.HTML -> R.drawable.html
-            FileTypes.PDF -> R.drawable.pdf
-            FileTypes.ZIP -> R.drawable.zip
+            FileTypes.AUDIO -> R.drawable.file_audio
+            FileTypes.VIDEO -> R.drawable.file_video
+            FileTypes.HTML -> R.drawable.file_html
+            FileTypes.PDF -> R.drawable.file_pdf
+            FileTypes.ZIP -> R.drawable.file_zip
             else -> R.drawable.file_text
         }
     }

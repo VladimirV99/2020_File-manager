@@ -40,7 +40,7 @@
         android:layout_width="40dp"
         android:layout_height="66dp"
         android:contentDescription="@null"
-        app:srcCompat="@drawable/dots"
+        app:srcCompat="@drawable/entry_dots"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toLeftOf="@id/cbSelected"
         app:layout_constraintTop_toTopOf="parent"
