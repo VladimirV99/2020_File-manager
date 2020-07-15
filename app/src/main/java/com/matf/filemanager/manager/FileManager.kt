@@ -34,6 +34,7 @@ object FileManager {
         if(file == null)
             return emptyList()
         return file.listFiles()
+            .filter { f -> !f.name.startsWith(".") }
             .sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name })
             .map { f -> FileEntry(f) }
     }
