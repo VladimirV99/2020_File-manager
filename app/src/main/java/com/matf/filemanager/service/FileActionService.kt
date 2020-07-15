@@ -36,20 +36,24 @@ class FileActionService : JobIntentService() {
 
                 targets.forEach { target ->
                     var newName = target.nameWithoutExtension
-                    //TODO Limit this by hardcoded value
-                    while(true) {
+
+                    var hasTarget = false
+                    for(i in 0 until 5) {
                         if(dest.resolve(newName+"."+target.extension).exists()) {
                             newName += "-copy"
                         } else {
+                            hasTarget = true
                             break
                         }
                     }
 
-                    if(target.isDirectory) {
-                        target.copyRecursively(dest.resolve(newName), false)
-                    } else {
-                        newName += "." + target.extension
-                        target.copyTo(dest.resolve(newName), false)
+                    if(hasTarget) {
+                        if(target.isDirectory) {
+                            target.copyRecursively(dest.resolve(newName), false)
+                        } else {
+                            newName += "." + target.extension
+                            target.copyTo(dest.resolve(newName), false)
+                        }
                     }
                 }
             }
