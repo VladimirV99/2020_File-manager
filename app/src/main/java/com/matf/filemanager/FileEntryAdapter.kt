@@ -1,54 +1,60 @@
 package com.matf.filemanager
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.recyclerview.widget.RecyclerView
+import com.matf.filemanager.manager.FileEntry
 import com.matf.filemanager.manager.FileManager
 import com.matf.filemanager.util.*
 
 /**
  * Adapter koji preslikava FileEntry model u odgovarajuci View za listu
  */
-class FileEntryAdapter(context: Context) : BaseAdapter() {
+class FileEntryAdapter(private val entries: ArrayList<FileEntry>) : RecyclerView.Adapter<FileEntryAdapter.EntryHolder>() {
 
-    private var inflater: LayoutInflater = LayoutInflater.from(context)
+    class EntryHolder(val entryView : View) : RecyclerView.ViewHolder(entryView) {
+        val imgIcon: ImageView = entryView.findViewById(R.id.imgIcon)
+        val tvTitle: TextView = entryView.findViewById(R.id.fileTitletv)
+        val tvSize: TextView = entryView.findViewById(R.id.fileSizetv)
+        val bProperties: ImageView = entryView.findViewById(R.id.bProperties)
+        val cbSelected: CheckBox = entryView.findViewById(R.id.cbSelected)
+    }
 
-    @SuppressLint("ViewHolder")
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.file_entry, parent, false)
+        return EntryHolder(view)
+    }
 
-        val view: View = inflater.inflate(R.layout.file_entry, parent, false)
+    override fun getItemCount(): Int {
+        return entries.size
+    }
+
+    override fun onBindViewHolder(holder: EntryHolder, position: Int) {
         val entry = FileManager.entries[position]
 
-        val imgIcon: ImageView = view.findViewById(R.id.imgIcon)
-        val tvTitle: TextView = view.findViewById(R.id.fileTitletv)
-        val tvSize: TextView = view.findViewById(R.id.fileSizetv)
-        val bProperties: ImageView = view.findViewById(R.id.bProperties)
-        val cbSelected: CheckBox = view.findViewById(R.id.cbSelected)
-
-        tvTitle.text = entry.file.name
+        holder.tvTitle.text = entry.file.name
 
         // Podesavanje ikonice fajla
-        imgIcon.setImageResource(getIconForFile(entry.file))
+        holder.imgIcon.setImageResource(getIconForFile(entry.file))
 
         // Postavljanje prostora koji zauzima
         if (!entry.file.isDirectory)
-            tvSize.text = view.context.getString(R.string.text_size, getSizeString(FileManager.entries[position].file))
+            holder.tvSize.text = holder.entryView.context.getString(R.string.text_size, getSizeString(FileManager.entries[position].file))
         else
-            tvSize.text = ""
+            holder.tvSize.text = ""
 
         // Inicijalizacija
         when(FileManager.menuMode) {
             MenuMode.SELECT -> {
-                bProperties.visibility = ImageButton.GONE
-                cbSelected.visibility = CheckBox.VISIBLE
+                holder.bProperties.visibility = ImageButton.GONE
+                holder.cbSelected.visibility = CheckBox.VISIBLE
             }
             MenuMode.OPEN -> {
-                bProperties.visibility = ImageButton.VISIBLE
-                bProperties.setOnClickListener {
+                holder.bProperties.visibility = ImageButton.VISIBLE
+                holder.bProperties.setOnClickListener {
                     val popup = PopupMenu(it.context, it)
                     popup.menuInflater.inflate(R.menu.file_entry_menu, popup.menu)
                     if(!FileManager.canOpenWith(entry.file))
@@ -64,24 +70,24 @@ class FileEntryAdapter(context: Context) : BaseAdapter() {
                     }
                     popup.show()
                 }
-                cbSelected.visibility = CheckBox.GONE
+                holder.cbSelected.visibility = CheckBox.GONE
             }
         }
 
         // Markiranje selektovanih entry-ja
         if (entry.selected) {
-            cbSelected.isChecked = true
-            view.setBackgroundColor(view.resources.getColor(R.color.colorHighlight))
+            holder.cbSelected.isChecked = true
+            holder.entryView.setBackgroundColor(holder.entryView.resources.getColor(R.color.colorHighlight))
         } else {
-            cbSelected.isChecked = false
-            view.setBackgroundColor(Color.TRANSPARENT)
+            holder.cbSelected.isChecked = false
+            holder.entryView.setBackgroundColor(Color.TRANSPARENT)
         }
 
         // Handler-i dogadjaja
-        view.setOnClickListener {
-            view.setBackgroundColor(view.resources.getColor(R.color.colorHighlight))
-            view.animate().setDuration(20).withEndAction {
-                view.setBackgroundColor(Color.TRANSPARENT)
+        holder.entryView.setOnClickListener {
+            holder.entryView.setBackgroundColor(holder.entryView.resources.getColor(R.color.colorHighlight))
+            holder.entryView.animate().setDuration(20).withEndAction {
+                holder.entryView.setBackgroundColor(Color.TRANSPARENT)
                 if(FileManager.menuMode == MenuMode.OPEN){
                     if (!FileManager.goTo(entry.file)) {
                         FileManager.requestFileOpenWith(entry.file)
@@ -92,27 +98,13 @@ class FileEntryAdapter(context: Context) : BaseAdapter() {
             }.start()
         }
 
-        view.setOnLongClickListener {
+        holder.entryView.setOnLongClickListener {
             if(FileManager.menuMode == MenuMode.OPEN) {
                 FileManager.toggleSelectionMode()
                 FileManager.toggleSelectionAt(position)
             }
             true
         }
-
-        return view
-    }
-
-    override fun getItem(position: Int): Any {
-        return FileManager.entries[position]
-    }
-
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
-
-    override fun getCount(): Int {
-        return FileManager.entries.size
     }
 
 }

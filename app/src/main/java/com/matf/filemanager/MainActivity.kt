@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import com.matf.filemanager.manager.DefaultFileManagerListener
 import com.matf.filemanager.manager.FileManager
@@ -28,7 +30,8 @@ import com.matf.filemanager.util.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var lFileEntries: ListView
+
+    private lateinit var lFileEntries: RecyclerView
 
     private lateinit var toolbar: Toolbar
     private lateinit var drawerLayout: DrawerLayout
@@ -47,7 +50,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bDelete: Button
     private lateinit var bPaste: Button
 
-    private lateinit var adapter: FileEntryAdapter
     private lateinit var fileActionReceiver: FileActionReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +59,6 @@ class MainActivity : AppCompatActivity() {
         checkPermissions()
 
         sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
-        adapter = FileEntryAdapter(this)
 
         fileActionReceiver = FileActionReceiver(Handler())
         fileActionReceiver.setReceiver(object: FileActionReceiver.Receiver {
@@ -78,7 +79,7 @@ class MainActivity : AppCompatActivity() {
     private fun initFileManagerListener() {
         FileManager.setListener(object: DefaultFileManagerListener(this, fileActionReceiver) {
             override fun onEntriesChange() {
-                adapter.notifyDataSetChanged()
+                lFileEntries.adapter?.notifyDataSetChanged()
                 bBack.isEnabled = FileManager.canGoBack()
                 bForward.isEnabled = FileManager.canGoForward()
             }
@@ -141,8 +142,12 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
         initNavigation()
 
-        lFileEntries = findViewById(R.id.lFileEntries)
-        lFileEntries.adapter = adapter
+        val viewManager = LinearLayoutManager(this)
+        val viewAdapter = FileEntryAdapter(FileManager.entries)
+        lFileEntries = findViewById<RecyclerView>(R.id.lFileEntries).apply {
+            layoutManager = viewManager
+            adapter = viewAdapter
+        }
 
         bBack = findViewById(R.id.bBack)
         bForward = findViewById(R.id.bForward)
