@@ -37,13 +37,10 @@ fun getTypeFromExtension(extension: String): FileTypes {
  * @return Id resursa koji sadrzi ikonicu
  */
 fun getIconForFile(file: File): Int {
-    if(file.isDirectory) {
-        return if(file.listFiles().isEmpty())
-            R.drawable.folder_empty
-        else
-            R.drawable.folder_filled
+    return if(file.isDirectory) {
+        R.drawable.folder_empty
     } else {
-        return when(getTypeFromExtension(file.extension)) {
+        when(getTypeFromExtension(file.extension)) {
             FileTypes.IMAGE -> R.drawable.file_image
             FileTypes.AUDIO -> R.drawable.file_audio
             FileTypes.VIDEO -> R.drawable.file_video
