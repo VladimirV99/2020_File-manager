@@ -11,11 +11,11 @@ import com.matf.filemanager.util.References
 import java.io.File
 
 /**
- * Servis za izvrsavanje akcija nad fajlom
+ * Service for performing file actions
  *
- * Akcije ukljucuju kopiranje, premestanje i brisanje fajlova
- * Posto te akcije mogu da traju dosta vremena koristimo servis kako bi se one
- * izvrsavale u pozadini cak i ako korisnik zatvori aplikaciju
+ * Actions include copying, cutting and deleting files
+ * Because those operations can last a lot of time we use a service so they are executed
+ * in the background even if the user closes the application
  */
 class FileActionService : JobIntentService() {
 

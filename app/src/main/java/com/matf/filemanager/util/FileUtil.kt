@@ -12,10 +12,10 @@ private val pdfExtensionRegex = Regex("^pdf$", RegexOption.IGNORE_CASE)
 private val htmlExtensionRegex = Regex("^(html|htm)$", RegexOption.IGNORE_CASE)
 
 /**
- * Vraca tip fajla za prosledjenu ekstenziju
+ * Returns the file type for the given extension
  *
- * @param extension Ekstenzija na osnovu koje trazimo tip
- * @return Tip fajla koji ima prosledjnu ekstenziju
+ * @param extension File extension
+ * @return File type for given extension
  */
 fun getTypeFromExtension(extension: String): FileTypes {
     return when {
@@ -31,10 +31,10 @@ fun getTypeFromExtension(extension: String): FileTypes {
 }
 
 /**
- * Trazi odgovarajucu ikonicu za prosledjen fajl
+ * Returns the icon for the given file
  *
- * @param file Fajl ciju ikonicu trazimo
- * @return Id resursa koji sadrzi ikonicu
+ * @param file File to find the icon for
+ * @return Resource ID for the file's icon
  */
 fun getIconForFile(file: File): Int {
     return if(file.isDirectory) {
@@ -55,10 +55,10 @@ fun getIconForFile(file: File): Int {
 private val sizeUnits: Array<String> = arrayOf("B", "KB", "MB", "GB")
 
 /**
- * Vraca nisku koja predstavlja velicinu fajla u odgovarajucoj jedinici
+ * Returns the file's size as a string
  *
- * @param file Fajl ciju velicinu trazimo
- * @return Velicina fajla [file]
+ * @param file File to find the size of
+ * @return Size string of the given file
  */
 fun getSizeString(file: File): String {
     var size = file.length().toFloat()

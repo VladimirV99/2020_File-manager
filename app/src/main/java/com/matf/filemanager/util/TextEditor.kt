@@ -4,9 +4,6 @@ import com.matf.filemanager.versions.StateSaver
 import java.io.*
 import java.util.*
 
-/**
- * Klasa koja implementira tekst editor
- */
 class TextEditor(private var filepath: String) : StateSaver<StringEntry>() {
     private var upToDate: Boolean = false
 
@@ -66,7 +63,6 @@ class TextEditor(private var filepath: String) : StateSaver<StringEntry>() {
     }
 
     private fun refreshFile(): Boolean {
-
         if (upToDate) return false
 
         val content = readAllFromFile()

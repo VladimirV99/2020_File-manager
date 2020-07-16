@@ -19,7 +19,7 @@ import java.io.File
 import kotlin.math.abs
 
 /**
- * Klasa koja implementira otvaranje tekstualnih fajlova
+ * Launcher for text files
  */
 class TextFileActivity : AppCompatActivity() {
 
@@ -57,20 +57,19 @@ class TextFileActivity : AppCompatActivity() {
         etFile.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) { return }
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {return }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { return }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 val oldText: String = textEditor.getCurrentInstance()?.content.orEmpty()
                 val newText: String = etFile.text.toString()
 
-                if(abs(newText.length - oldText.length) > 5){
-                    Log.d("TEXT-CHANGED", "SIGNIFICANT CHANGE DETECTED")
+                if(abs(newText.length - oldText.length) > 5) {
                     textEditor.goTo(StringEntry(newText, etFile.selectionStart))
                 }
             }
         })
 
-        // Dugme za vracanje sadrzaja korak u nazad
+        // Button event handlers
         btnUndo.setOnClickListener {
             forceSync()
             if(textEditor.goBack()){
@@ -79,7 +78,6 @@ class TextFileActivity : AppCompatActivity() {
             }
         }
 
-        // Dugme za pomeranje sadrzaja u napred
         btnRedo.setOnClickListener{
             forceSync()
             if(textEditor.goForward()){
@@ -88,7 +86,6 @@ class TextFileActivity : AppCompatActivity() {
             }
         }
 
-        // Dugme za cuvanje sadrzaja
         btnSave.setOnClickListener {
             forceSync()
             val ss: SaveStatus = textEditor.saveChanges()

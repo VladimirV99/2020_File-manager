@@ -1,37 +1,37 @@
 package com.matf.filemanager.versions
 
 /**
- * Interfejs za podrsku objekata kojima zelimo da pamtimo istoriju promena
+ * Support interface for objects that keep a history of states
  *
- * @param T Tip objekta za koji zelimo da cuvamo istoriju
+ * @param <T> Type of the object whose history to keep
  */
 interface Versionable<T> {
 
     /**
-     * Vraca trenutno stanje objekta
+     * Current version of the object
      */
     fun getCurrentInstance(): T?
 
     /**
-     * Prelazi u novo stanje
+     * Transition to a new state
      *
-     * @param newElement Stanje u koje treba da se predje
-     * @return Da li je uspela promena stanja
+     * @param newElement New state to go to
+     * @return Was the state change successful
      */
     fun goTo(newElement: T): Boolean
 
     /**
-     * Povratak na prethodno stanje
+     * Return to the previous state
      *
-     * @return Da li je uspela promena stanja
+     * @return Was the state change successful
      */
     fun goBack(): Boolean
 
     /**
-     * Povratak na sledece stanje
-     * Moguce samo ukoliko je prethodno pozvana goBack funkcija
+     * Return to the next state
+     * Possible only if goBack was called previously
      *
-     * @return Da li je uspela promena stanja
+     * @return Was the state change successful
      */
     fun goForward(): Boolean
 

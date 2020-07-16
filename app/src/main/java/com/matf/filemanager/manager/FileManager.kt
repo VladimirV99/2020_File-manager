@@ -7,13 +7,13 @@ import com.matf.filemanager.util.MenuMode
 import java.io.File
 
 /**
- * Singlton klasa zaduzena za sve operacije za navigaciju i otvaranje fajlova i foldera
+ * Singleton class in charge of all navigation and file opening operations
  */
 object FileManager {
 
-    private var history: StateSaver<File> = StateSaver() // Niz fajlova za podrzavanje operacija back i forward
+    private var history: StateSaver<File> = StateSaver() // History of file locations
 
-    val currentDirectory: File?
+    private val currentDirectory: File?
         get() = history.getCurrentInstance()
     var entries: ArrayList<FileEntry> = ArrayList()
         private set
@@ -22,14 +22,17 @@ object FileManager {
         private set
     var clipboardMode: ClipboardMode = ClipboardMode.NONE
         private set
-    var clipboard: ArrayList<File> = ArrayList()
-        private set
+    private var clipboard: ArrayList<File> = ArrayList()
 
     private var selectionSize : Int = 0
 
     private var listener: FileManagerChangeListener? = null
 
-    // Izlistavanje svih foldera i fajlova
+    /**
+     * List all files and folders in the specified file
+     *
+     * @param file Root directory
+     */
     private fun listFileEntries(file: File?): List<FileEntry> {
         if(file == null)
             return emptyList()
@@ -125,8 +128,8 @@ object FileManager {
                 clipboard.addAll(entries.filter { e -> e.selected }.map { e -> e.file })
             }
             MenuMode.OPEN -> {
-                // Nismo u modu za selekciju, ispraznicemo clipboard
-                // Nikada ne bi trebalo da dodjemo ovde
+                // We are not in selection mode, we're gonna empty the clipboard
+                // We should never get here
                 clipboard.clear()
             }
 
@@ -173,7 +176,7 @@ object FileManager {
     fun paste() {
         when(clipboardMode) {
             ClipboardMode.NONE -> {
-                // Nikada ne bi trebalo da dodjemo ovde
+                // We should never get here
             }
             ClipboardMode.COPY -> {
                 copy()

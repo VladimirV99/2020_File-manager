@@ -6,12 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.matf.filemanager.R
 import com.matf.filemanager.util.References
 import java.io.File
 
 /**
- * Klasa koja implementira otvaranje slika
+ * Launcher for image files
  */
 class ImageFileActivity : AppCompatActivity() {
 
@@ -27,10 +28,12 @@ class ImageFileActivity : AppCompatActivity() {
 
         imageTextView.text = f.name
 
-        // Otvaranje slike
         if(f.exists()){
             val myBitmap: Bitmap = BitmapFactory.decodeFile(f.absolutePath)
             imageView.setImageBitmap(myBitmap)
+        } else {
+            Toast.makeText(applicationContext, "File not found", Toast.LENGTH_LONG).show()
+            finish()
         }
     }
 }

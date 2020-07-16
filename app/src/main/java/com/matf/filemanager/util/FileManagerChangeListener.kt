@@ -3,66 +3,66 @@ package com.matf.filemanager.util
 import java.io.File
 
 /**
- * Osluskivac za promene i dogadjaje koje signalizira FileManager
- * Koristi se za azuriranje liste fajlova kao i za njihovo otvaranje po zahtevu
+ * Listener for events fired by FileManager
+ * Used for refreshing the file list and performing operations on files
  */
 interface FileManagerChangeListener {
     /**
-     * Callback funkcija koja je pozvana kada se promeni lista fajlova ili fajlovi u clipboard-u
+     * Callback function which is called when the file list or clipboard changes
      */
     fun onEntriesChange()
 
     /**
-     * Callback funkcija koja je pozvana kada se promeni rezim za selekciju
+     * Callback function which is called when the selection mode changes
      *
-     * @param mode Novi rezim za selekciju
+     * @param mode New selection mode
      */
     fun onSelectionModeChange(mode : MenuMode)
 
     /**
-     * Callback funkcija koja je pozvana kada se promeni rezim clipboard-a
+     * Callback function which is called when the clipboard mode changes
      *
-     * @param mode Novi rezim za clipboard
+     * @param mode New clipboard mode
      */
     fun onClipboardChange(mode : ClipboardMode)
 
     /**
-     * Callback funkcija kojom se zahteva otvaranje fajla pomocu ove aplikacije
-     * Ako ga mi ne podrzavamo, onda ce se otvoriti nekom sistemskom aplikacijom
+     * Callback function which requests to open files with this app
+     * If we don't support the type, then open it with a system app
      *
-     * @param file Fajl koji treba otvoriti
-     * @return Da li je fajl uspesno otvoren
+     * @param file File to open
+     * @return Was file successfully opened
      */
     fun onRequestFileOpen(file: File): Boolean
 
     /**
-     * Callback funkcija kojom se zahteva otvaranje fajla pomocu sistemske aplikacije
+     * Callback function which requests to open files with a system app
      *
-     * @param file Fajl koji treba otvoriti
-     * @return Da li je fajl uspesno otvoren
+     * @param file File to open
+     * @return Was file successfully opened
      */
     fun onRequestFileOpenWith(file: File) : Boolean
 
     /**
-     * Callback funkcija koja zapocinje kopiranje fajlova
+     * Callback function which starts file copy
      *
-     * @param targets Lista fajlova koje treba kopirati
-     * @param dest Destinacija za kopiranje
+     * @param targets List of files to copy
+     * @param dest Destination for copying the targets
      */
     fun copyFile(targets: List<File>, dest: File)
 
     /**
-     * Callback funkcija koja zapocinje premestanje fajlova
+     * Callback function which starts file move
      *
-     * @param targets Lista fajlova koje treba premestiti
-     * @param dest Destinacija za premestanje
+     * @param targets List of files to move
+     * @param dest Destination for moving the targets
      */
     fun moveFile(targets: List<File>, dest: File)
 
     /**
-     * Callback funkcija koja zapocinje brisanje fajlova
+     * Callback function which starts file deletion
      *
-     * @param targets Lista fajlova koje treba obrisati
+     * @param targets List of files to delete
      */
     fun deleteFile(targets: List<File>)
 }

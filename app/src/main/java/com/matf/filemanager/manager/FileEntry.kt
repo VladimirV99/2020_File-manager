@@ -3,6 +3,6 @@ package com.matf.filemanager.manager
 import java.io.File
 
 /**
- * Model za entitet predstavljen u listi fajlova
+ * Model for the entity in the file list
  */
 data class FileEntry (var file: File, var selected: Boolean = false)

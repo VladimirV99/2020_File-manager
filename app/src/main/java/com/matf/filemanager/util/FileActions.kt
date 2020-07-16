@@ -1,12 +1,12 @@
 package com.matf.filemanager.util
 
 /**
- * Enum koji oznacava tip akcije koju treba izvrsiti nad selektovanim fajlovima
+ * Enum of action types to perform on selected files
  *
- * Moguce vrednosti su:
- * COPY - Fajlove treba kopirati
- * MOVE - Fajlove treba premestiti
- * DELETE - Fajlove treba obrisati
+ * Possible values:
+ * COPY   - Copy files
+ * MOVE   - Move files
+ * DELETE - Delete files
  */
 enum class FileActions {
     COPY,

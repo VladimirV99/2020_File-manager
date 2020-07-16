@@ -13,7 +13,7 @@ import com.matf.filemanager.util.References
 import kotlinx.android.synthetic.main.activity_video_file.*
 
 /**
- * Klasa koja implementira otvaranje video zapisa
+ * Launcher for video files
  */
 class VideoFileActivity : AppCompatActivity() {
 

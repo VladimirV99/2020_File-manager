@@ -17,14 +17,18 @@ import com.matf.filemanager.util.*
 import java.io.File
 
 /**
- * Implementacija osnovnih metoda FileManagerChangeListener interfejsa
+ * Basic method implementation of the FileManagerChangeListener interface
  *
- * @param context Kontekst iz kog ce se pozivati drugi prozori
- * @param fileActionReceiver Objekat kome proslediti rezultate operacija
+ * @param context Application context
+ * @param fileActionReceiver Action receiver object
  */
 abstract class DefaultFileManagerListener(private val context: Context, private val fileActionReceiver: FileActionReceiver): FileManagerChangeListener {
 
-    // Otvaranje fajlova nasim programima
+    /**
+     * Open a file using this app
+     *
+     * @param file File to open
+     */
     override fun onRequestFileOpen(file: File): Boolean {
         val intent: Intent? = when(getTypeFromExtension(file.extension)) {
             FileTypes.TEXT, FileTypes.HTML -> Intent(context, TextFileActivity::class.java)
@@ -42,7 +46,11 @@ abstract class DefaultFileManagerListener(private val context: Context, private 
         return false
     }
 
-    // Otvaranje fajlova drugim programima na uredjaju
+    /**
+     * Open a file using a system app
+     *
+     * @param file File to open
+     */
     override fun onRequestFileOpenWith(file: File): Boolean {
         val uri = FileProvider.getUriForFile(context, "android.matf", file)
         val intent = Intent(Intent.ACTION_VIEW)

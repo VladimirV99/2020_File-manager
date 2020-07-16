@@ -11,7 +11,7 @@ import com.matf.filemanager.manager.FileManager
 import com.matf.filemanager.util.*
 
 /**
- * Adapter koji preslikava FileEntry model u odgovarajuci View za listu
+ * Adapter that maps a FileEntry model to a View for the file list
  */
 class FileEntryAdapter(private val entries: ArrayList<FileEntry>) : RecyclerView.Adapter<FileEntryAdapter.EntryHolder>() {
 
@@ -37,16 +37,16 @@ class FileEntryAdapter(private val entries: ArrayList<FileEntry>) : RecyclerView
 
         holder.tvTitle.text = entry.file.name
 
-        // Podesavanje ikonice fajla
+        // Set the file icon
         holder.imgIcon.setImageResource(getIconForFile(entry.file))
 
-        // Postavljanje prostora koji zauzima
+        // Set the file size
         if (!entry.file.isDirectory)
             holder.tvSize.text = holder.entryView.context.getString(R.string.text_size, getSizeString(FileManager.entries[position].file))
         else
             holder.tvSize.text = ""
 
-        // Inicijalizacija
+        // Initialization
         when(FileManager.menuMode) {
             MenuMode.SELECT -> {
                 holder.bProperties.visibility = ImageButton.GONE
@@ -74,7 +74,7 @@ class FileEntryAdapter(private val entries: ArrayList<FileEntry>) : RecyclerView
             }
         }
 
-        // Markiranje selektovanih entry-ja
+        // Highlight selected entries
         if (entry.selected) {
             holder.cbSelected.isChecked = true
             holder.entryView.setBackgroundColor(holder.entryView.resources.getColor(R.color.colorHighlight))
@@ -83,7 +83,7 @@ class FileEntryAdapter(private val entries: ArrayList<FileEntry>) : RecyclerView
             holder.entryView.setBackgroundColor(Color.TRANSPARENT)
         }
 
-        // Handler-i dogadjaja
+        // Event handlers
         holder.entryView.setOnClickListener {
             holder.entryView.setBackgroundColor(holder.entryView.resources.getColor(R.color.colorHighlight))
             holder.entryView.animate().setDuration(20).withEndAction {

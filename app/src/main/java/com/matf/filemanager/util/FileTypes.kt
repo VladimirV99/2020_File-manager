@@ -1,7 +1,7 @@
 package com.matf.filemanager.util
 
 /**
- * Enum koji sadrzi tipove fajlova koje prepoznajemo ili nepoznat tip
+ * Enum of file types supported by the app
  */
 enum class FileTypes {
     TEXT,

@@ -14,7 +14,7 @@ import com.matf.filemanager.util.References
 import kotlinx.android.synthetic.main.activity_audio_file.*
 
 /**
- * Klasa koja implementira otvaranje audio fajlova
+ * Launcher for audio files
  */
 class AudioFileActivity : AppCompatActivity() {
 
@@ -32,7 +32,7 @@ class AudioFileActivity : AppCompatActivity() {
         mp.setVolume(0.5f, 0.5f)
         totalTime = mp.duration
 
-        // Podesavanje jacine zvuka
+        // Volume control
         volumeBar.setOnSeekBarChangeListener(
             object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(seekbar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -101,9 +101,10 @@ class AudioFileActivity : AppCompatActivity() {
     }
 
     /**
-     * Akcija koja se desava na klik play dugmeta
+     * On play button pressed handler
+     * Called from the layout
      *
-     * @param v Dugme koje je pritisnuto
+     * @param v Pressed button
      */
     fun playBtnClick(v: View) {
         if(mp.isPlaying){

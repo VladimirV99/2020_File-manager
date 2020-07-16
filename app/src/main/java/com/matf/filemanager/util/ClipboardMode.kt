@@ -1,12 +1,12 @@
 package com.matf.filemanager.util
 
 /**
- * Enum koji oznacava stanje clipboard-a
+ * Enum of possible clipboard states
  *
- * Moguce vrednosti su:
- * NONE - Nista se ne cuva trenutno
- * COPY - Cuvaju se fajlovi koji ce biti kopirani
- * CUT - Cuvaju se fajlovi koji ce biti premesteni
+ * Possible values:
+ * NONE - Nothing is being stored
+ * COPY - Stored files are to be copied
+ * CUT  - Stored files are to be moved
  */
 enum class ClipboardMode {
     NONE,

@@ -1,11 +1,11 @@
 package com.matf.filemanager.util
 
 /**
- * Enum koji oznacava rezim liste fajlova
+ * Enum of possible file list menu states
  *
- * Moguce vrednosti su:
- * OPEN - Klikom na element se otvara fajl ili direktorijum
- * SELECT - Klikom na element se on obelezava selektovanim
+ * Possible values:
+ * OPEN   - Menu is in file open mode
+ * SELECT - Menu is in file select mode
  */
 enum class MenuMode {
     OPEN,

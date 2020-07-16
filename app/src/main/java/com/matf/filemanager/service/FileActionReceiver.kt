@@ -5,8 +5,8 @@ import android.os.Handler
 import android.os.ResultReceiver
 
 /**
- * Osluskivac za rezultate servisa FileActionService
- * Obavestava o zavrsetku operacije kopiranja, premestanja ili brisanja fajla
+ * Event listener for FileActionService results
+ * Notifies of completion of copy, cut or delete operations
  */
 class FileActionReceiver(handler: Handler?) : ResultReceiver(handler) {
     private var receiver: Receiver? = null
