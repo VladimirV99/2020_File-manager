@@ -1,31 +1,27 @@
 # Android File Manager
 
-![Android CI](https://github.com/matf-pp/2020_File-manager/workflows/Android%20CI/badge.svg)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/60047fde3b904499a8ea49554edd35cb)](https://app.codacy.com/gh/matf-pp/2020_File-manager?utm_source=github.com&utm_medium=referral&utm_content=matf-pp/2020_File-manager&utm_campaign=Badge_Grade_Dashboard)
+![Android CI](https://github.com/VladimirV99/AndroidFileManager/workflows/Android%20CI/badge.svg)
 
-## Opis
-Osnovna ideja projekta jeste implementacija menadžera fajlova za operativni sistem Android. 
-U sklopu istog implementirani su i programi za otvaranje najčešćih tipova fajlova kao što su tekstualni, video, audio i slikovni fajlovi. 
-Svi ostali fajlovi se otvaraju pomoću odgovarajućih drugih aplikacija instaliranih na sistemu. 
-Osim otvaranja fajlova moguće su i osnovne operacije nad njima kao što su kopiranje, premeštanje i brisanje pojedinačnih ili 
-grupe selektovanih fajlova odjednom. 
-Aplikacija podržava i dve teme: svetlu i tamnu koja se može ili podesiti ručno u meniju za navigaciju ili se može koristiti sistemsko 
-podešavanje na Android 10+ uređajima
+## About
 
-## Primeri rada aplikacije
-![1](https://user-images.githubusercontent.com/6758619/82671923-ed84d680-9c3f-11ea-98c9-f36dad0f6e88.gif)
-![2](https://user-images.githubusercontent.com/6758619/82671935-f37ab780-9c3f-11ea-822f-4654f3ae4694.gif)
-![3](https://user-images.githubusercontent.com/6758619/82671942-f70e3e80-9c3f-11ea-8916-2f7e5436efbb.gif)
+This is an implementation of a file manager for Android. It includes launchers for basic file types like text, image, audio and video files. Other files can be opened using appropriate apps installed on the system. The app supports two themes: light and dark which can be set manually or using the system dark mode on Android 10+
 
-## Jezici i tehnologije
-Korišćen je programski jezik Kotlin u Android Studio okruženju. Za dizajn korisničkog interfejsa upotrebili smo [Google Material](https://material.io/develop/android/) biblioteku
-za navigaciju kao i deo [Android Jetpack](https://developer.android.com/jetpack) biblioteke za neke osnovne elemente.
+The app is written in the Kotlin programming language, and uses [Google Material](https://material.io/develop/android/) and [Android Jetpack](https://developer.android.com/jetpack) libraries for ui design, navigation and some useful layout components.
 
-## Pokretanje
-Projekat je pravljen za Android operativni sistem verzije 4.4 i naviše. U sekciji Releases na GitHub-u možete preuzeti izvršnu verziju
-programa i zatim je instalirati na svom android uređaju. Da bi instalacija .apk fajla prošla nesmetano neophodno je da omogućite skidanje i instaliranje fajlova koji dolaze iz nepoznatih izvora.
+## Screenshots
 
-## Autori
-1.  Vuksanović Vladimir, 145/2017, vladevuksan99@gmail.com
-2.  Kojadinović Aleksa, 130/2017, kojadinovic.aleksa98@gmail.com
-3.  Čeliković Lazar, 259/2017, celikoviclazar@hotmail.com
+![Light Theme](https://github.com/VladimirV99/AndroidFileManager/screenshots/theme_light.png)
+![Dark Theme](https://github.com/VladimirV99/AndroidFileManager/screenshots/theme_dark.png)
+
+![Navigation](https://github.com/VladimirV99/AndroidFileManager/screenshots/navigation.png)
+![Selection](https://github.com/VladimirV99/AndroidFileManager/screenshots/selection.png)
+
+## Installation
+
+The app supports all versions of Android after version 4.4. The latest version can be downloaded from the GitHub Releases section. Because the app isn't signed, to install it you need to enable installation of apps from unknown sources in the phone settings.
+
+## Authors
+
+- [Vuksanović Vladimir](https://github.com/VladimirV99)
+- [Kojadinović Aleksa](https://github.com/aleksakojadinovic)
+- [Čeliković Lazar](https://github.com/Hos1g4k1)
